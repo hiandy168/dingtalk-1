@@ -2,7 +2,7 @@
 # coding=utf-8
 
 
-from celery_app import app
+from celery_app.celery_ding import app
 # from pymongo import MongoClient
 from celery_app.DingTalkBot import Message
 from bson.objectid import ObjectId
