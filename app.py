@@ -4,15 +4,15 @@
 
 from flask import Flask, request
 from flask_restful import Resource, Api
-from pymongo import MongoClient
+# from pymongo import MongoClient
 from celery_app import task
-
+from celery_app.task import posts
 
 app = Flask(__name__)
 api = Api(app)
-client = MongoClient()
-db = client['jinshuju']
-posts = db.data
+# client = MongoClient()
+# db = client['jinshuju']
+# posts = db.data
 
 
 class Jinshuju(Resource):

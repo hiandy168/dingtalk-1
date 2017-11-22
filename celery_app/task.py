@@ -3,14 +3,14 @@
 
 
 from celery_app.celery_ding import app
-# from pymongo import MongoClient
+from pymongo import MongoClient
 from celery_app.DingTalkBot import Message
 from bson.objectid import ObjectId
-from dingtalk.app import posts
+# from dingtalk.app import posts
 
-# client = MongoClient()
-# db = client['jinshuju']
-# posts = db.data
+client = MongoClient()
+db = client['jinshuju']
+posts = db.data
 
 
 @app.task
