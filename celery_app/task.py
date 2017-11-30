@@ -30,6 +30,7 @@ def push(objectId, token):
         at_mobiles = ' '.join(['@' + x for x in phones])
     finally:
         pass
+
     utc_dt = datetime.strptime(post['created_at'][:-4], '%Y-%m-%d %H:%M:%S')
     local_dt = utc_dt + timedelta(hours=8)
     created_time = datetime.strftime(local_dt, '%Y-%m-%d %H:%M:%S')

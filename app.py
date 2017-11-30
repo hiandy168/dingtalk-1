@@ -2,7 +2,7 @@
 # coding=utf-8
 
 
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_restful import Resource, Api
 # from pymongo import MongoClient
 from celery_app import task
@@ -21,7 +21,7 @@ class Jinshuju(Resource):
         id = str(posts.insert(info))
         task.push.delay(
             id, '3ad6ce86f476952c6c3f5ff010bfc471a2bcdbd6349db4fe20c2b9984249b9d2')
-        return 200
+        return Response(status=200)
 
 
 api.add_resource(Jinshuju, '/jinshuju')
