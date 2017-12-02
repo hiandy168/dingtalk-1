@@ -3,7 +3,7 @@
 
 
 from flask import Flask, request, Response
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 # from pymongo import MongoClient
 from celery_app import task
 from celery_app.task import posts
@@ -16,15 +16,20 @@ api = Api(app)
 
 
 class Jinshuju(Resource):
-    def post(self):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument(
+            'entry', type=str, required=True, help="Date Error!", location='json')
+        # print(self.reqparse.parse_args())
+
+    def post(self, token):
         info = request.get_json()['entry']
         id = str(posts.insert(info))
-        task.push.delay(
-            id, '3ad6ce86f476952c6c3f5ff010bfc471a2bcdbd6349db4fe20c2b9984249b9d2')
+        task.push.delay(id, token)
         return Response(status=200)
 
 
-api.add_resource(Jinshuju, '/jinshuju')
+api.add_resource(Jinshuju, '/jinshuju/<string:token>')
 
 
 if __name__ == '__main__':

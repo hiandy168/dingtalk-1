@@ -14,7 +14,12 @@ db = client['jinshuju']
 posts = db.data
 info = db.info
 
-
+'''info
+{
+    'school': "龙平高中部"，
+    'phone': ['13926509780', '18629132805']
+}
+'''
 @app.task
 def push(objectId, token):
 
