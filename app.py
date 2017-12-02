@@ -24,7 +24,7 @@ class Jinshuju(Resource):
 
     def post(self, token):
         info = request.get_json()['entry']
-        id = str(posts.insert_one(info))
+        id = str(posts.insert_one(info).inserted_id)
         task.push.delay(id, token)
         return Response(status=200)
 
